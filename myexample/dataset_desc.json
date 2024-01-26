@@ -1,0 +1,512 @@
+{
+    "alpaca_en": {
+        "desc": "chatgpt生成的alpaca数据集",
+        "url": "https://huggingface.co/datasets/QingyiSi/Alpaca-CoT",
+        "paper": "",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 52000,
+        "formodel": "Pretrain,SFT"
+    },
+    "alpaca_zh": {
+        "desc": "chatgpt生成的alpaca数据集",
+        "url": "https://huggingface.co/datasets/QingyiSi/Alpaca-CoT",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 52000,
+        "formodel": "Pretrain,SFT"
+    },
+    "alpaca_gpt4_en": {
+        "desc": "gpt4生成的alpaca数据集",
+        "url": "https://huggingface.co/datasets/QingyiSi/Alpaca-CoT",
+        "paper": "",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 52000,
+        "formodel": "Pretrain,SFT"
+    },
+    "alpaca_gpt4_zh": {
+        "desc": "gpt4生成的alpaca数据集",
+        "url": "https://huggingface.co/datasets/QingyiSi/Alpaca-CoT",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 52000,
+        "formodel": "Pretrain,SFT"
+    },
+    "self_cognition": {
+        "desc": "带参数的模型自我介绍数据集",
+        "url": "",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 80,
+        "formodel": "SFT"
+    },
+    "oaast_sft": {
+        "desc": "OpenAssistant Conversations对话数据集",
+        "url": "https://huggingface.co/datasets/OpenAssistant/oasst1",
+        "paper": "OpenAssistant Conversations -- Democratizing Large Language Model Alignment",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": true,
+        "length": 20202,
+        "formodel": "Pretrain,SFT"
+    },
+    "oaast_sft_zh": {
+        "desc": "OpenAssistant Conversations中文对话数据集",
+        "url": "https://huggingface.co/datasets/OpenAssistant/oasst1",
+        "paper": "OpenAssistant Conversations -- Democratizing Large Language Model Alignment",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": true,
+        "length": 689,
+        "formodel": "Pretrain,SFT"
+    },
+    "lima": {
+        "desc": "对齐数据集，对话数据集",
+        "url": "https://huggingface.co/datasets/GAIR/lima",
+        "paper": "LIMA: Less Is More for Alignment",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": true,
+        "length": 1029,
+        "formodel": "Pretrain,SFT"
+    },
+    "glaive_toolcall": {
+        "desc": "glaive公司发布的工具调用问答数据集,有human，function_call，observation，gpt，tools组成",
+        "url": "https://huggingface.co/datasets/glaiveai/glaive-function-calling",
+        "paper": "",
+        "format": "sharegpt",
+        "language": "英文",
+        "multiturn": true,
+        "length": 10000,
+        "formodel": "Pretrain,SFT"
+    },
+    "example": {
+        "desc": "示例数据集，只有2条",
+        "url": "",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": true,
+        "length": 2,
+        "formodel": "Pretrain,SFT"
+    },
+    "guanaco": {
+        "desc": "原驼数据集",
+        "url": "https://huggingface.co/datasets/JosephusCheung/GuanacoDataset",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文，英文，日文",
+        "multiturn": false,
+        "length": 534530 ,
+        "formodel": "Pretrain,SFT"
+    },
+    "belle_2m": {
+        "desc": "Belle发布的200万对话数据集",
+        "url": "https://huggingface.co/datasets/BelleGroup/train_2M_CN",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 2000000,
+        "formodel": "Pretrain,SFT"
+    },
+    "belle_1m": {
+        "desc": "100万条由BELLE项目生成的中文指令数据",
+        "url": "https://huggingface.co/datasets/BelleGroup/train_1M_CN",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 1000000,
+        "formodel": "Pretrain,SFT"
+    },
+    "belle_0.5m": {
+        "desc": "50万条由BELLE项目生成的中文指令数据。",
+        "url": "https://huggingface.co/datasets/BelleGroup/train_0.5M_CN",
+        "paper": "",
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 500000,
+        "formodel": "Pretrain,SFT"
+    },
+    "belle_dialog": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "belle_math": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "belle_multiturn": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "ultra_chat": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "open_platypus": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "codealpaca": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "alpaca_cot": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "openorca": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "mathinstruct": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "firefly": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "webqa": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "webnovel": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "nectar_sft": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "deepctrl": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "adgen": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "sharegpt_hyper": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "sharegpt4": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "ultrachat_200k": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "agent_instruct": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "lmsys_chat": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "evol_instruct": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "hh_rlhf_en": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "oaast_rm": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "oaast_rm_zh": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "comparison_gpt4_en": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "comparison_gpt4_zh": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "nectar_rm": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "wiki_demo": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "c4_demo": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "refinedweb": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "redpajama_v2": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "wikipedia_en": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "wikipedia_zh": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "pile": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "skypile": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "the_stack": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    },
+    "starcoder_python": {
+        "desc": "",
+        "url": "",
+        "paper": "",
+        "format": "",
+        "language": "",
+        "multiturn": true,
+        "length": 1000,
+        "formodel": "Pretrain"
+    }
+}
