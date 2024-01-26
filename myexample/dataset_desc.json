@@ -140,54 +140,54 @@
         "formodel": "Pretrain,SFT"
     },
     "belle_dialog": {
-        "desc": "",
-        "url": "",
+        "desc": "40万条由BELLE项目生成的个性化角色对话数据",
+        "url": "https://huggingface.co/datasets/BelleGroup/generated_chat_0.4M?row=1",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "alpaca",
+        "language": "中文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 400000,
+        "formodel": "Pretrain,SFT"
     },
     "belle_math": {
-        "desc": "",
-        "url": "",
+        "desc": "25万条由BELLE项目生成的中文数学题数据，包含解题过程,由ChatGPT产生的",
+        "url": "https://huggingface.co/datasets/BelleGroup/school_math_0.25M",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 250000,
+        "formodel": "Pretrain,SFT"
     },
     "belle_multiturn": {
-        "desc": "",
-        "url": "",
+        "desc": "包含约80万条由BELLE项目生成的用户与助手的多轮对话",
+        "url": "https://huggingface.co/datasets/BelleGroup/multiturn_chat_0.8M",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "alpaca",
+        "language": "中文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 800000,
+        "formodel": "Pretrain,SFT"
     },
     "ultra_chat": {
-        "desc": "",
-        "url": "",
+        "desc": "Turbo API 提供支持的开源、大规模、多轮对话数据,采用了两个独立的 ChatGPT Turbo API",
+        "url": "https://huggingface.co/datasets/stingning/ultrachat",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "alpaca",
+        "language": "英文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 770000,
+        "formodel": "Pretrain,SFT"
     },
     "open_platypus": {
-        "desc": "",
-        "url": "",
-        "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "desc": "专注于提高LLM逻辑推理能力",
+        "url": "https://huggingface.co/datasets/garage-bAInd/Open-Platypus",
+        "paper": "Platypus: Quick, Cheap, and Powerful Refinement of LLMs",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 249000,
+        "formodel": "Pretrain,SFT"
     },
     "codealpaca": {
         "desc": "",

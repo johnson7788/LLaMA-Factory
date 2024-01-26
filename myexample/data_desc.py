@@ -37,6 +37,23 @@ def data_length(name):
         data = json.load(f)
     print(f"数据集 {name} 的长度为 {len(data)}")
 
+def modify_data():
+    save_file = "dataset_desc.json"
+    with open(save_file, "r") as f:
+        data = json.load(f)
+    new_data = []
+    for one in data:
+        desc = one["desc"]
+        if desc == "":
+            one["format"] = "alpaca"
+            one["language"] = "英文"
+            one["multiturn"] = False
+            one["formodel"] = "Pretrain,SFT"
+        new_data.append(one)
+    with open(save_file, "w") as f:
+     json.dump(new_data, f, indent=4)
+
 if __name__ == '__main__':
     # generate_file()
-    data_length("glaive_toolcall_10k.json")
+    # data_length("glaive_toolcall_10k.json")
+    modify_data()
