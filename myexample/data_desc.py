@@ -55,5 +55,5 @@ def modify_data():
 
 if __name__ == '__main__':
     # generate_file()
-    # data_length("glaive_toolcall_10k.json")
-    modify_data()
+    data_length("c4_demo.json")
+    # modify_data()
