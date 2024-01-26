@@ -106,7 +106,7 @@
         "format": "alpaca",
         "language": "中文，英文，日文",
         "multiturn": false,
-        "length": 534530 ,
+        "length": 534530,
         "formodel": "Pretrain,SFT"
     },
     "belle_2m": {
@@ -190,323 +190,323 @@
         "formodel": "Pretrain,SFT"
     },
     "codealpaca": {
-        "desc": "",
-        "url": "",
+        "desc": "根据问题生成python代码",
+        "url": "https://huggingface.co/datasets/sahil2801/CodeAlpaca-20k",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 20000,
+        "formodel": "Pretrain,SFT"
     },
     "alpaca_cot": {
-        "desc": "",
-        "url": "",
+        "desc": "指令调优数据集",
+        "url": "https://huggingface.co/datasets/QingyiSi/Alpaca-CoT",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 74771,
+        "formodel": "Pretrain,SFT"
     },
     "openorca": {
-        "desc": "",
-        "url": "",
-        "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "desc": "OpenOrca 数据集是增强型 FLAN 集合数据的集合。目前 GPT-4 完成量约为 100 万，GPT-3.5 完成量约为 320 万,带GPT4解释轨迹的",
+        "url": "https://huggingface.co/datasets/Open-Orca/OpenOrca",
+        "paper": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 4200000,
+        "formodel": "Pretrain,SFT"
     },
     "mathinstruct": {
-        "desc": "",
-        "url": "",
-        "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "desc": "精心策划的指令调整数据集， 由 13 个数学原理数据集编译而成，关注思想链（CoT）和思想程序（PoT）原理的混合使用",
+        "url": "https://huggingface.co/datasets/TIGER-Lab/MathInstruct",
+        "paper": "MAmmoTH: Building Math Generalist Models through Hybrid Instruction Tuning",
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 262000,
+        "formodel": "Pretrain,SFT"
     },
     "firefly": {
-        "desc": "",
-        "url": "",
+        "desc": "流萤中文对话式大语言模型，23个常见的中文数据集",
+        "url": "https://huggingface.co/datasets/YeungNLP/firefly-train-1.1M",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 1150000,
+        "formodel": "Pretrain,SFT"
     },
     "webqa": {
-        "desc": "",
-        "url": "",
+        "desc": "指令微调数据集",
+        "url": "https://huggingface.co/datasets/suolyer/webqa",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 36200,
+        "formodel": "Pretrain,SFT"
     },
     "webnovel": {
-        "desc": "",
-        "url": "",
+        "desc": "包含从12560本网文提取的约21.7M条可用于训练小说生成的中文指令数据，质量不好",
+        "url": "https://huggingface.co/datasets/zxbsmk/webnovel_cn?row=3",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 21700000,
+        "formodel": "Pretrain,SFT"
     },
     "nectar_sft": {
-        "desc": "",
-        "url": "",
+        "desc": "chatgpt生成的数据，质量一般",
+        "url": "https://huggingface.co/datasets/AstraMindAI/SFT-Nectar",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
+        "length": 131000,
+        "formodel": "Pretrain,SFT"
     },
     "deepctrl": {
-        "desc": "",
-        "url": "",
+        "desc": "匠数大模型SFT数据集",
+        "url": "https://www.modelscope.cn/datasets/deepctrl/deepctrl-sft-data/summary",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "alpaca",
+        "language": "英文，中文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 120000000,
+        "formodel": "Pretrain,SFT"
     },
     "adgen": {
-        "desc": "",
-        "url": "",
+        "desc": "词语生成句子数据集",
+        "url": "https://huggingface.co/datasets/HasturOfficial/adgen",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "format": "alpaca",
+        "language": "中文",
+        "multiturn": false,
+        "length": 115000,
+        "formodel": "SFT"
     },
     "sharegpt_hyper": {
-        "desc": "",
-        "url": "",
+        "desc": "Share GPT收集到的多轮对话数据",
+        "url": "https://huggingface.co/datasets/totally-not-an-llm/sharegpt-hyperfiltered-3k",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "sharegpt",
+        "language": "英文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 3243,
+        "formodel": "Pretrain,SFT"
     },
     "sharegpt4": {
         "desc": "",
-        "url": "",
+        "url": "https://huggingface.co/datasets/shibing624/sharegpt_gpt4",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "sharegpt",
+        "language": "英文,中文,日文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 103415,
+        "formodel": "Pretrain,SFT"
     },
     "ultrachat_200k": {
-        "desc": "",
-        "url": "",
-        "paper": "",
-        "format": "",
-        "language": "",
+        "desc": "用于训练 Zephyr-7B-β的数据集",
+        "url": "https://huggingface.co/datasets/HuggingFaceH4/ultrachat_200k",
+        "paper": "Zephyr: Direct Distillation of LM Alignment",
+        "format": "sharegpt",
+        "language": "英文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 200000,
+        "formodel": "Pretrain,SFT"
     },
     "agent_instruct": {
-        "desc": "",
-        "url": "",
+        "desc": "利用GPT4生成的具有ReAct的轨迹数据集，多轮的COT",
+        "url": "https://huggingface.co/datasets/THUDM/AgentInstruct",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "sharegpt",
+        "language": "英文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 1866,
+        "formodel": "Pretrain,SFT"
     },
     "lmsys_chat": {
-        "desc": "",
-        "url": "",
+        "desc": "大规模现实世界LLM对话数据集，包含 100 万个真实世界对话，其中包含 25 个最先进的 LLMs",
+        "url": "https://huggingface.co/datasets/lmsys/lmsys-chat-1m",
         "paper": "",
-        "format": "",
-        "language": "",
+        "format": "sharegpt",
+        "language": "英文",
         "multiturn": true,
-        "length": 1000,
-        "formodel": "Pretrain"
+        "length": 1000000,
+        "formodel": "Pretrain,SFT"
     },
     "evol_instruct": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "hh_rlhf_en": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "oaast_rm": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "oaast_rm_zh": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "comparison_gpt4_en": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "comparison_gpt4_zh": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "nectar_rm": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "wiki_demo": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "c4_demo": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "refinedweb": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "redpajama_v2": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "wikipedia_en": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "wikipedia_zh": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "pile": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "skypile": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "the_stack": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     },
     "starcoder_python": {
         "desc": "",
         "url": "",
         "paper": "",
-        "format": "",
-        "language": "",
-        "multiturn": true,
+        "format": "alpaca",
+        "language": "英文",
+        "multiturn": false,
         "length": 1000,
-        "formodel": "Pretrain"
+        "formodel": "Pretrain,SFT"
     }
 }
