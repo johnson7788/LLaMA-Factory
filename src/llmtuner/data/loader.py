@@ -1,8 +1,8 @@
 import inspect
 import os
-from typing import TYPE_CHECKING, List, Literal, Union
+from typing import TYPE_CHECKING, Literal, Union
 
-from datasets import concatenate_datasets, interleave_datasets, load_dataset, load_from_disk
+from datasets import load_dataset, load_from_disk
 
 from ..extras.constants import FILEEXT2TYPE
 from ..extras.logging import get_logger
@@ -10,7 +10,7 @@ from .aligner import align_dataset
 from .parser import get_dataset_list
 from .preprocess import get_preprocess_and_print_func
 from .template import get_template_and_fix_tokenizer
-from .utils import checksum
+from .utils import checksum, merge_dataset
 
 
 if TYPE_CHECKING:
@@ -29,7 +29,8 @@ def load_single_dataset(
     dataset_attr: "DatasetAttr",
     model_args: "ModelArguments",
     data_args: "DataArguments",
-):
+) -> Union["Dataset", "IterableDataset"]:
+    logger.info("Loading dataset {}...".format(dataset_attr))
     data_path, data_name, data_dir, data_files = None, None, None, None
     if dataset_attr.load_from in ["hf_hub", "ms_hub"]:
         data_path = dataset_attr.dataset_name
@@ -43,7 +44,7 @@ def load_single_dataset(
 
     elif dataset_attr.load_from == "file":
         data_files = []
-        local_path: str = os.path.join(data_args.dataset_dir, dataset_attr.dataset_name)
+        local_path = os.path.join(data_args.dataset_dir, dataset_attr.dataset_name)
         if os.path.isdir(local_path):  # is directory
             for file_name in os.listdir(local_path):
                 data_files.append(os.path.join(local_path, file_name))
@@ -60,7 +61,7 @@ def load_single_dataset(
         if data_path is None:
             raise ValueError("File extension must be txt, csv, json or jsonl.")
 
-        checksum(data_files, dataset_attr.dataset_sha1)
+        checksum(data_files, dataset_attr.file_sha1)
     else:
         raise NotImplementedError
 
@@ -110,30 +111,6 @@ def load_single_dataset(
     return align_dataset(dataset, dataset_attr, data_args)
 
 
-def merge_dataset(
-    all_datasets: List[Union["Dataset", "IterableDataset"]],
-    data_args: "DataArguments",
-    training_args: "Seq2SeqTrainingArguments",
-) -> Union["Dataset", "IterableDataset"]:
-    if len(all_datasets) == 1:
-        return all_datasets[0]
-    elif data_args.mix_strategy == "concat":
-        if data_args.streaming:
-            logger.warning("The samples between different datasets will not be mixed in streaming mode.")
-        return concatenate_datasets(all_datasets)
-    elif data_args.mix_strategy.startswith("interleave"):
-        if not data_args.streaming:
-            logger.warning("We recommend using `mix_strategy=concat` in non-streaming mode.")
-        return interleave_datasets(
-            datasets=all_datasets,
-            probabilities=data_args.interleave_probs,
-            seed=training_args.seed,
-            stopping_strategy="first_exhausted" if data_args.mix_strategy.endswith("under") else "all_exhausted",
-        )
-    else:
-        raise ValueError("Unknown mixing strategy.")
-
-
 def get_dataset(
     tokenizer: "PreTrainedTokenizer",
     model_args: "ModelArguments",
@@ -142,7 +119,7 @@ def get_dataset(
     stage: Literal["pt", "sft", "rm", "ppo"],
     # split: Optional[str] = "train", # TODO: add split
 ) -> Union["Dataset", "IterableDataset"]:
-    template = get_template_and_fix_tokenizer(data_args.template, tokenizer)
+    template = get_template_and_fix_tokenizer(tokenizer, data_args.template)
     if data_args.train_on_prompt and template.efficient_eos:
         raise ValueError("Current template does not support `train_on_prompt`.")
 
@@ -156,11 +133,11 @@ def get_dataset(
             return dataset
 
         if data_args.streaming:
-            raise ValueError("Turn off dataset streaming to save cache files.")
+            raise ValueError("Turn off `streaming` when saving dataset to disk.")
 
     with training_args.main_process_first(desc="load dataset"):
         all_datasets = []
-        for dataset_attr in get_dataset_list(data_args):  # TODO: add split
+        for dataset_attr in get_dataset_list(data_args):
             all_datasets.append(load_single_dataset(dataset_attr, model_args, data_args))
         dataset = merge_dataset(all_datasets, data_args, training_args)
 
@@ -188,6 +165,6 @@ def get_dataset(
             try:
                 print_function(next(iter(dataset)))
             except StopIteration:
-                raise RuntimeError("Empty dataset!")
+                raise RuntimeError("Cannot find valid samples, check `data/README.md` for the data format.")
 
         return dataset

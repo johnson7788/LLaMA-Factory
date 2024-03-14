@@ -10,9 +10,11 @@ from transformers.utils import (
     WEIGHTS_NAME,
     is_torch_bf16_gpu_available,
     is_torch_cuda_available,
+    is_torch_mps_available,
     is_torch_npu_available,
     is_torch_xpu_available,
 )
+from transformers.utils.versions import require_version
 
 from .constants import V_HEAD_SAFE_WEIGHTS_NAME, V_HEAD_WEIGHTS_NAME
 from .logging import get_logger
@@ -53,6 +55,17 @@ class AverageMeter:
         self.sum += val * n
         self.count += n
         self.avg = self.sum / self.count
+
+
+def check_dependencies() -> None:
+    if int(os.environ.get("DISABLE_VERSION_CHECK", "0")):
+        logger.warning("Version checking has been disabled, may lead to unexpected behaviors.")
+    else:
+        require_version("transformers>=4.37.2", "To fix: pip install transformers>=4.37.2")
+        require_version("datasets>=2.14.3", "To fix: pip install datasets>=2.14.3")
+        require_version("accelerate>=0.27.2", "To fix: pip install accelerate>=0.27.2")
+        require_version("peft>=0.9.0", "To fix: pip install peft>=0.9.0")
+        require_version("trl>=0.7.11", "To fix: pip install trl>=0.7.11")
 
 
 def count_parameters(model: torch.nn.Module) -> Tuple[int, int]:
@@ -133,6 +146,8 @@ def get_current_device() -> torch.device:
         device = "xpu:{}".format(os.environ.get("LOCAL_RANK", "0"))
     elif is_torch_npu_available():
         device = "npu:{}".format(os.environ.get("LOCAL_RANK", "0"))
+    elif is_torch_mps_available():
+        device = "mps:{}".format(os.environ.get("LOCAL_RANK", "0"))
     elif is_torch_cuda_available():
         device = "cuda:{}".format(os.environ.get("LOCAL_RANK", "0"))
     else:
@@ -142,6 +157,12 @@ def get_current_device() -> torch.device:
 
 
 def get_device_count() -> int:
+    r"""
+    Gets the number of available GPU devices.
+    """
+    if not torch.cuda.is_available():
+        return 0
+
     return torch.cuda.device_count()
 
 

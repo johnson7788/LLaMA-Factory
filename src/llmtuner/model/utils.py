@@ -1,5 +1,5 @@
-import inspect
-from typing import TYPE_CHECKING, Any, Dict, List
+from enum import Enum, unique
+from typing import TYPE_CHECKING, Dict, List
 
 import torch
 from transformers import PreTrainedModel
@@ -7,46 +7,27 @@ from transformers.utils import cached_file
 
 from ..extras.constants import V_HEAD_SAFE_WEIGHTS_NAME, V_HEAD_WEIGHTS_NAME
 from ..extras.logging import get_logger
-from ..extras.misc import get_current_device
 
 
 if TYPE_CHECKING:
     from transformers import PretrainedConfig, PreTrainedTokenizer
 
-    from ..hparams import DataArguments, FinetuningArguments, ModelArguments
+    from ..hparams import ModelArguments
 
 
 logger = get_logger(__name__)
 
 
-def dispatch_model(model: "PreTrainedModel") -> "PreTrainedModel":
+@unique
+class QuantizationMethod(str, Enum):
     r"""
-    Dispatches a pre-trained model to GPUs with balanced memory when the GPU is available.
-    Borrowed from: https://github.com/huggingface/transformers/blob/v4.36.2/src/transformers/modeling_utils.py#L3570
+    Borrowed from `transformers.utils.quantization_config.QuantizationMethod`.
     """
-    if getattr(model, "quantization_method", None):  # already set on current device
-        return model
 
-    if (
-        torch.cuda.device_count() > 1
-        and isinstance(model, PreTrainedModel)
-        and model._no_split_modules is not None
-        and model.config.model_type != "chatglm"
-    ):
-        from accelerate import dispatch_model
-        from accelerate.utils import get_balanced_memory, infer_auto_device_map
-
-        kwargs = {"dtype": model.dtype, "no_split_module_classes": model._get_no_split_modules("auto")}
-        max_memory = get_balanced_memory(model, **kwargs)
-        # Make sure tied weights are tied before creating the device map.
-        model.tie_weights()
-        device_map = infer_auto_device_map(model, max_memory=max_memory, **kwargs)
-        device_map_kwargs = {"device_map": device_map}
-        if "skip_keys" in inspect.signature(dispatch_model).parameters:
-            device_map_kwargs["skip_keys"] = model._skip_keys_device_placement
-        return dispatch_model(model, **device_map_kwargs)
-    else:
-        return model.to(device=get_current_device())
+    BITS_AND_BYTES = "bitsandbytes"
+    GPTQ = "gptq"
+    AWQ = "awq"
+    AQLM = "aqlm"
 
 
 def find_all_linear_modules(model: "PreTrainedModel") -> List[str]:
@@ -56,7 +37,7 @@ def find_all_linear_modules(model: "PreTrainedModel") -> List[str]:
     quantization_method = getattr(model, "quantization_method", None)
     if quantization_method is None:
         linear_cls = torch.nn.Linear
-    elif quantization_method == "bitsandbytes":
+    elif quantization_method == QuantizationMethod.BITS_AND_BYTES:
         import bitsandbytes as bnb
 
         linear_cls = bnb.nn.Linear4bit if getattr(model, "is_loaded_in_4bit", False) else bnb.nn.Linear8bitLt
@@ -76,16 +57,31 @@ def find_all_linear_modules(model: "PreTrainedModel") -> List[str]:
     return list(module_names)
 
 
-def get_modelcard_args(
-    model_args: "ModelArguments", data_args: "DataArguments", finetuning_args: "FinetuningArguments"
-) -> Dict[str, Any]:
-    return {
-        "tasks": "text-generation",
-        "license": "other",
-        "finetuned_from": model_args.model_name_or_path,
-        "dataset": [dataset.strip() for dataset in data_args.dataset.split(",")],
-        "tags": ["llama-factory"] + (["lora"] if finetuning_args.finetuning_type == "lora" else []),
-    }
+def find_expanded_modules(model: "PreTrainedModel", target_modules: List[str], num_layer_trainable: int) -> List[str]:
+    r"""
+    Finds the modules in the expanded blocks to apply lora.
+    """
+    num_layers = getattr(model.config, "num_hidden_layers", None)
+    if not num_layers:
+        raise ValueError("Model was not supported.")
+
+    if num_layers % num_layer_trainable != 0:
+        raise ValueError(
+            "`num_layers` {} should be divisible by `num_layer_trainable` {}.".format(num_layers, num_layer_trainable)
+        )
+
+    stride = num_layers // num_layer_trainable
+    trainable_layer_ids = range(stride - 1, num_layers + stride - 1, stride)
+    trainable_layers = [".{:d}.".format(idx) for idx in trainable_layer_ids]
+    module_names = []
+    for name, _ in model.named_modules():
+        if any(target_module in name for target_module in target_modules) and any(
+            trainable_layer in name for trainable_layer in trainable_layers
+        ):
+            module_names.append(name)
+
+    logger.info("Apply lora to layers: {}".format(",".join(map(str, trainable_layer_ids))))
+    return module_names
 
 
 def load_valuehead_params(path_or_repo_id: str, model_args: "ModelArguments") -> Dict[str, torch.Tensor]:

@@ -21,13 +21,12 @@ logger = get_logger(__name__)
 def preprocess_pretrain_dataset(
     examples: Dict[str, List[Any]], tokenizer: "PreTrainedTokenizer", data_args: "DataArguments"
 ) -> Dict[str, List[List[int]]]:
-    # build grouped texts with format `X1 X2 X3 ...`
-    text_examples = [examples["prompt"][i][0]["content"] for i in range(len(examples["prompt"]))]
-    tokenized_examples = tokenizer(text_examples, add_special_tokens=False)
-    for i in range(len(tokenized_examples["input_ids"])):
-        tokenized_examples["input_ids"][i] += [tokenizer.eos_token_id]
-        tokenized_examples["attention_mask"][i] += [1]
+    # build grouped texts with format `X1 X2 X3 ...` if packing is enabled
+    text_examples = [messages[0]["content"] + tokenizer.eos_token for messages in examples["prompt"]]
+    if not data_args.packing:
+        return tokenizer(text_examples, add_special_tokens=False, max_length=data_args.cutoff_len)
 
+    tokenized_examples = tokenizer(text_examples, add_special_tokens=False)
     concatenated_examples = {k: list(chain(*tokenized_examples[k])) for k in tokenized_examples.keys()}
     total_length = len(concatenated_examples[list(concatenated_examples.keys())[0]])
     block_size = data_args.cutoff_len
@@ -38,6 +37,10 @@ def preprocess_pretrain_dataset(
         k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
         for k, t in concatenated_examples.items()
     }
+    if data_args.template == "gemma":
+        for i in range(len(result["input_ids"])):
+            result["input_ids"][i][0] = tokenizer.bos_token_id
+
     return result
 
 
@@ -59,7 +62,12 @@ def preprocess_supervised_dataset(
         input_ids, labels = [], []
         for turn_idx, (source_ids, target_ids) in enumerate(
             template.encode_multiturn(
-                tokenizer, messages, examples["system"][i], examples["tools"][i], data_args.cutoff_len
+                tokenizer,
+                messages,
+                examples["system"][i],
+                examples["tools"][i],
+                data_args.cutoff_len,
+                data_args.reserved_label_len,
             )
         ):
             if data_args.train_on_prompt:
@@ -98,12 +106,12 @@ def preprocess_packed_supervised_dataset(
             continue
 
         messages = examples["prompt"][i] + examples["response"][i]
-        for turn_idx, (source_ids, target_ids) in enumerate(
-            template.encode_multiturn(tokenizer, messages, examples["system"][i], examples["tools"][i])
+        for source_ids, target_ids in template.encode_multiturn(
+            tokenizer, messages, examples["system"][i], examples["tools"][i]
         ):
             if data_args.train_on_prompt:
                 source_mask = source_ids
-            elif turn_idx != 0 and template.efficient_eos:
+            elif len(input_ids) != 0 and template.efficient_eos:
                 source_mask = [tokenizer.eos_token_id] + [IGNORE_INDEX] * (len(source_ids) - 1)
             else:
                 source_mask = [IGNORE_INDEX] * len(source_ids)
@@ -121,9 +129,10 @@ def preprocess_packed_supervised_dataset(
     total_length = (total_length // block_size) * block_size
     # split by chunks of cutoff_len
     for i in range(0, total_length, block_size):
-        model_inputs["input_ids"].append(input_ids[i : i + block_size])
-        model_inputs["attention_mask"].append([1] * block_size)
-        model_inputs["labels"].append(labels[i : i + block_size])
+        if not all(label == IGNORE_INDEX for label in labels[i : i + block_size]):
+            model_inputs["input_ids"].append(input_ids[i : i + block_size])
+            model_inputs["attention_mask"].append([1] * block_size)
+            model_inputs["labels"].append(labels[i : i + block_size])
 
     return model_inputs
 
@@ -144,10 +153,15 @@ def preprocess_unsupervised_dataset(
         if len(examples["response"][i]) == 1:
             messages = examples["prompt"][i] + examples["response"][i]
         else:
-            messages = examples["prompt"][i] + [{"role": Role.ASSISTANT, "content": ""}]
+            messages = examples["prompt"][i] + [{"role": Role.ASSISTANT.value, "content": ""}]
 
         input_ids, labels = template.encode_oneturn(
-            tokenizer, messages, examples["system"][i], examples["tools"][i], data_args.cutoff_len
+            tokenizer,
+            messages,
+            examples["system"][i],
+            examples["tools"][i],
+            data_args.cutoff_len,
+            data_args.reserved_label_len,
         )
 
         if template.efficient_eos:
@@ -174,12 +188,21 @@ def preprocess_pairwise_dataset(
 
         chosen_messages = examples["prompt"][i] + [examples["response"][i][0]]
         rejected_messages = examples["prompt"][i] + [examples["response"][i][1]]
-
         prompt_ids, chosen_ids = template.encode_oneturn(
-            tokenizer, chosen_messages, examples["system"][i], examples["tools"][i], data_args.cutoff_len
+            tokenizer,
+            chosen_messages,
+            examples["system"][i],
+            examples["tools"][i],
+            data_args.cutoff_len,
+            data_args.reserved_label_len,
         )
         _, rejected_ids = template.encode_oneturn(
-            tokenizer, rejected_messages, examples["system"][i], examples["tools"][i], data_args.cutoff_len
+            tokenizer,
+            rejected_messages,
+            examples["system"][i],
+            examples["tools"][i],
+            data_args.cutoff_len,
+            data_args.reserved_label_len,
         )
 
         if template.efficient_eos:
@@ -229,7 +252,7 @@ def get_preprocess_and_print_func(
         preprocess_func = partial(preprocess_pretrain_dataset, tokenizer=tokenizer, data_args=data_args)
         print_function = partial(print_unsupervised_dataset_example, tokenizer=tokenizer)
     elif stage == "sft" and not training_args.predict_with_generate:
-        if data_args.sft_packing:
+        if data_args.packing:
             preprocess_func = partial(
                 preprocess_packed_supervised_dataset, tokenizer=tokenizer, template=template, data_args=data_args
             )
