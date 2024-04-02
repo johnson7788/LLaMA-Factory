@@ -9,6 +9,7 @@ from ..extras.logging import get_logger
 from ..hparams import get_infer_args, get_train_args
 from ..model import load_model_and_tokenizer
 from .dpo import run_dpo
+from .orpo import run_orpo
 from .ppo import run_ppo
 from .pt import run_pt
 from .rm import run_rm
@@ -36,14 +37,14 @@ def run_exp(args: Optional[Dict[str, Any]] = None, callbacks: Optional[List["Tra
         run_ppo(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
     elif finetuning_args.stage == "dpo":
         run_dpo(model_args, data_args, training_args, finetuning_args, callbacks)
+    elif finetuning_args.stage == "orpo":
+        run_orpo(model_args, data_args, training_args, finetuning_args, callbacks)
     else:
         raise ValueError("Unknown task.")
 
 
 def export_model(args: Optional[Dict[str, Any]] = None):
     model_args, data_args, finetuning_args, _ = get_infer_args(args)
-
-    model_args.device_map = {"": "cpu"}
 
     if model_args.export_dir is None:
         raise ValueError("Please specify `export_dir` to save model.")
@@ -62,8 +63,9 @@ def export_model(args: Optional[Dict[str, Any]] = None):
 
     if getattr(model, "quantization_method", None) is None:  # cannot convert dtype of a quantized model
         output_dtype = getattr(model.config, "torch_dtype", torch.float16)
-        model = model.to(output_dtype)
         setattr(model.config, "torch_dtype", output_dtype)
+        for param in model.parameters():
+            param.data = param.data.to(output_dtype)
 
     model.save_pretrained(
         save_directory=model_args.export_dir,

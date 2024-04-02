@@ -1,4 +1,3 @@
-import math
 from typing import TYPE_CHECKING, Callable, Dict, List, Optional, Union
 
 import torch
@@ -19,7 +18,6 @@ if is_galore_available():
 
 
 if TYPE_CHECKING:
-    from datasets import Dataset, IterableDataset
     from transformers import Seq2SeqTrainingArguments
     from transformers.modeling_utils import PreTrainedModel
     from trl import AutoModelForCausalLMWithValueHead
@@ -31,7 +29,13 @@ logger = get_logger(__name__)
 
 
 class DummyOptimizer(torch.optim.Optimizer):
-    def __init__(self, lr: float = 1e-3, optimizer_dict: Optional[dict] = None, *args, **kwargs) -> None:
+    r"""
+    A dummy optimizer used for the GaLore algorithm.
+    """
+
+    def __init__(
+        self, lr: float = 1e-3, optimizer_dict: Optional[Dict["torch.nn.Parameter", "torch.optim.Optimizer"]] = None
+    ) -> None:
         dummy_tensor = torch.randn(1, 1)
         self.optimizer_dict = optimizer_dict
         super().__init__([dummy_tensor], {"lr": lr})
@@ -66,7 +70,7 @@ def create_modelcard_and_push(
 
 def create_ref_model(
     model_args: "ModelArguments", finetuning_args: "FinetuningArguments", add_valuehead: bool = False
-) -> Union["PreTrainedModel", "AutoModelForCausalLMWithValueHead"]:
+) -> Optional[Union["PreTrainedModel", "AutoModelForCausalLMWithValueHead"]]:
     r"""
     Creates reference model for PPO/DPO training. Evaluation mode is not supported.
 
@@ -101,7 +105,7 @@ def create_ref_model(
 
 def create_reward_model(
     model: "AutoModelForCausalLMWithValueHead", model_args: "ModelArguments", finetuning_args: "FinetuningArguments"
-) -> "AutoModelForCausalLMWithValueHead":
+) -> Optional["AutoModelForCausalLMWithValueHead"]:
     r"""
     Creates reward model for PPO training.
     """
@@ -156,11 +160,10 @@ def _get_decay_parameter_names(model: "PreTrainedModel") -> List[str]:
 
 def _create_galore_optimizer(
     model: "PreTrainedModel",
-    dataset: Union["Dataset", "IterableDataset"],
     training_args: "Seq2SeqTrainingArguments",
     finetuning_args: "FinetuningArguments",
 ) -> "torch.optim.Optimizer":
-    require_version("galore_torch", "To fix: pip install git+https://github.com/hiyouga/GaLore.git")
+    require_version("galore_torch", "To fix: pip install galore_torch")
 
     if len(finetuning_args.galore_target) == 1 and finetuning_args.galore_target[0] == "all":
         galore_targets = find_all_linear_modules(model)
@@ -209,12 +212,6 @@ def _create_galore_optimizer(
         if training_args.gradient_accumulation_steps != 1:
             raise ValueError("Per-layer GaLore does not support gradient accumulation.")
 
-        if training_args.max_steps > 0:
-            num_training_steps = training_args.max_steps
-        else:
-            total_train_batch_size = training_args.per_device_train_batch_size * training_args.world_size
-            num_training_steps = training_args.num_train_epochs * math.ceil(len(dataset) / total_train_batch_size)
-
         optimizer_dict: Dict["torch.Tensor", "torch.optim.Optimizer"] = {}
         for param in nodecay_params:
             param_groups = [dict(params=[param])]
@@ -222,29 +219,19 @@ def _create_galore_optimizer(
         for param in decay_params:
             param_groups = [dict(params=[param], weight_decay=training_args.weight_decay)]
             optimizer_dict[param] = optim_class(param_groups, **optim_kwargs)
-        for param in galore_params:
+        for param in galore_params:  # galore params have weight decay
             param_groups = [dict(params=[param], weight_decay=training_args.weight_decay, **galore_kwargs)]
             optimizer_dict[param] = optim_class(param_groups, **optim_kwargs)
 
-        scheduler_dict: Dict["torch.Tensor", "torch.optim.lr_scheduler.LRScheduler"] = {}
-        for param in trainable_params:
-            scheduler_dict[param] = get_scheduler(
-                training_args.lr_scheduler_type,
-                optimizer=optimizer_dict[param],
-                num_warmup_steps=training_args.get_warmup_steps(num_training_steps) * 2,
-                num_training_steps=num_training_steps * 2,
-            )
-
-        def optimizer_hook(param: "torch.Tensor"):
+        def optimizer_hook(param: "torch.nn.Parameter"):
             if param.grad is not None:
                 optimizer_dict[param].step()
                 optimizer_dict[param].zero_grad()
-                scheduler_dict[param].step()
 
         for param in trainable_params:
             param.register_post_accumulate_grad_hook(optimizer_hook)
 
-        optimizer = DummyOptimizer(lr=training_args.learning_rate)  # display scheduler result
+        optimizer = DummyOptimizer(lr=training_args.learning_rate, optimizer_dict=optimizer_dict)
     else:
         param_groups = [
             dict(params=nodecay_params),
@@ -259,7 +246,6 @@ def _create_galore_optimizer(
 
 def _create_loraplus_optimizer(
     model: "PreTrainedModel",
-    dataset: Union["Dataset", "IterableDataset"],
     training_args: "Seq2SeqTrainingArguments",
     finetuning_args: "FinetuningArguments",
 ) -> "torch.optim.Optimizer":
@@ -302,12 +288,36 @@ def _create_loraplus_optimizer(
 
 def create_custom_optimzer(
     model: "PreTrainedModel",
-    dataset: Union["Dataset", "IterableDataset"],
     training_args: "Seq2SeqTrainingArguments",
     finetuning_args: "FinetuningArguments",
 ) -> Optional["torch.optim.Optimizer"]:
     if finetuning_args.use_galore:
-        return _create_galore_optimizer(model, dataset, training_args, finetuning_args)
+        return _create_galore_optimizer(model, training_args, finetuning_args)
 
     if finetuning_args.loraplus_lr_ratio is not None:
-        return _create_loraplus_optimizer(model, dataset, training_args, finetuning_args)
+        return _create_loraplus_optimizer(model, training_args, finetuning_args)
+
+
+def create_custom_scheduler(
+    training_args: "Seq2SeqTrainingArguments",
+    num_training_steps: int,
+    optimizer: Optional["torch.optim.Optimizer"] = None,
+) -> None:
+    if optimizer is not None and isinstance(optimizer, DummyOptimizer):
+        optimizer_dict = optimizer.optimizer_dict
+        scheduler_dict: Dict["torch.nn.Parameter", "torch.optim.lr_scheduler.LRScheduler"] = {}
+
+        for param in optimizer_dict.keys():
+            scheduler_dict[param] = get_scheduler(
+                training_args.lr_scheduler_type,
+                optimizer=optimizer_dict[param],
+                num_warmup_steps=training_args.get_warmup_steps(num_training_steps) * 2,
+                num_training_steps=num_training_steps * 2,
+            )
+
+        def scheduler_hook(param: "torch.nn.Parameter"):
+            if param.grad is not None:
+                scheduler_dict[param].step()
+
+        for param in optimizer_dict.keys():
+            param.register_post_accumulate_grad_hook(scheduler_hook)
