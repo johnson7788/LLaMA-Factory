@@ -1,0 +1,710 @@
+[
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "查询下IP59.82.21.45"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"59.82.21.45\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '中国', 'province': '北京', 'city': '北京', 'district': '', 'ip': '59.82.21.45'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址59.82.21.45位于中国北京市。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "我需要查询一个IP地址的地理位置，有什么推荐的工具吗？\n"
+            },
+            {
+                "from": "gpt",
+                "value": "我可以帮你查询哦，请告诉我你要查询的ip\n"
+            },
+            {
+                "from": "human",
+                "value": "好的,165.154.221.41\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"ip_address\\\":\\\"165.154.221.41\\\"}\",\"name\":\"get_ip_location\"}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '越南', 'province': '', 'city': None, 'district': '越南胡志明市', 'ip': '165.154.221.41'}"
+            },
+            {
+                "from": "gpt",
+                "value": "根据查询结果显示，IP地址165.154.221.41的地理位置位于越南胡志明市。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "IP地址为165.154.221.41的位于哪个城市？\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"ip_address\\\":\\\"165.154.221.41\\\"}\",\"name\":\"get_ip_location\"}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '越南', 'province': '', 'city': None, 'district': '越南胡志明市', 'ip': '165.154.221.41'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址为165.154.221.41位于越南胡志明市。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "查询下103.56.92.10\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"ip_address\\\":\\\"103.56.92.10\\\"}\",\"name\":\"get_ip_location\"}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '印度', 'province': '印度', 'city': '', 'district': '', 'ip': '103.56.92.10'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址103.56.92.10位于印度。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "IP查询74.125.24.100\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"74.125.24.100\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '新加坡', 'province': '', 'city': None, 'district': '新加坡', 'ip': '74.125.24.100'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址74.125.24.100的地理位置位于新加坡。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "IP地址为202.141.80.21的信息\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"202.141.80.21\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '印度', 'province': '印度', 'city': '', 'district': '', 'ip': '202.141.80.21'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址202.141.80.21的信息显示该IP地址位于印度。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "216.58.211.206查询\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"216.58.211.206\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '西班牙', 'province': '', 'city': None, 'district': '西班牙马德里', 'ip': '216.58.211.206'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址216.58.211.206的查询结果显示该IP地址位于西班牙马德里。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "203.0.113.5是哪的"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"203.0.113.5\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '保留地址', 'province': '保留地址', 'city': '', 'district': '', 'ip': '203.0.113.5'}"
+            },
+            {
+                "from": "gpt",
+                "value": "203.0.113.5是一个保留地址，无法确定其具体所属地理位置。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "198.51.100.0帮我查询\n"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"198.51.100.0\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '保留地址', 'province': '保留地址', 'city': '', 'district': '', 'ip': '198.51.100.0'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址198.51.100.0属于保留地址，无法确定具体的地理位置信息。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "帮我查询下192.168.100.100"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"get_ip_location\",\"arguments\":{\"ip_address\":\"192.168.100.100\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "{'country': '局域网', 'province': '局域网', 'city': '', 'district': '', 'ip': '192.168.100.100'}"
+            },
+            {
+                "from": "gpt",
+                "value": "IP地址192.168.100.100是一个局域网地址，无法确定具体的国家、省份或城市信息。"
+            }
+        ],
+        "tools": "[{\"name\": \"get_ip_location\", \"description\": \"根据提供的ip地址，查询ip地址的位置信息\", \"parameters\": {\"type\": \"object\", \"properties\": {\"ip_address\": {\"type\": \"string\", \"description\": \"ip地址需要提供\"}}, \"required\": [\"ip_address\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "http://www.baidu.com网址是否在微信中无法访问？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"http://www.baidu.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "在微信中访问http://www.baidu.com网址是可以的，没有被禁止访问。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "微信是否阻止了对poe.com网址的访问？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"poe.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "根据我的检查，微信没有阻止对poe.com网址的访问。您可以尝试重新访问该网址，或者检查您的网络连接是否正常。如果仍然无法访问，请尝试使用其他网络或设备进行访问。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "我能否在微信上打开www.google.com网址？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"name\":\"weixin_block\",\"arguments\":{\"url\":\"www.google.com\"}}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "在微信中打开www.google.com网址可能会受到限制，因为微信在某些情况下会限制访问一些外部网站。您可以尝试在浏览器中打开www.google.com网址，或者使用其他浏览器应用来访问该网站。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "微信是否屏蔽了对facebook.com网址的连接？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"facebook.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "根据我的了解，微信目前没有屏蔽对facebook.com网址的连接。您可以尝试发送该链接给朋友或者在微信中打开该链接来确认。如果您遇到了无法连接的问题，可能是其他原因导致的。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "www.twitter.com网址是否被微信禁止访问？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"www.twitter.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "根据我的检查，www.twitter.com网址并没有被微信禁止访问。您可以尝试访问该网址以确认。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "在微信内部是否无法访问instagram网址？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"https://www.instagram.com/\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "在微信内部可以访问Instagram网址。如果您有任何其他问题，请随时告诉我。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "微信是否对youtube网址进行了封锁？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"https://www.youtube.com/\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "根据我的检查，微信并没有对YouTube网址进行封锁。您可以尝试访问YouTube网站来确认。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "是否可以在微信中浏览www.linkedin.com网址？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"www.linkedin.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "是的，您可以在微信中浏览www.linkedin.com网址。您可以直接在微信的浏览器中输入该网址进行访问。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "微信是否限制了对www.netflix.com网址的浏览？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"www.netflix.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "根据我的检查，微信没有限制对www.netflix.com网址的浏览。您可以尝试访问该网站来确认。如果您遇到任何问题，请尝试使用其他网络或浏览器访问。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "是否可以在微信中打开www.qq.com网址？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{\\\"url\\\":\\\"http://www.qq.com\\\"}\",\"name\":\"weixin_block\"}"
+            },
+            {
+                "from": "observation",
+                "value": "没有拦截该网址"
+            },
+            {
+                "from": "gpt",
+                "value": "可以在微信中打开www.qq.com网址。"
+            }
+        ],
+        "tools": "[{\"name\": \"weixin_block\", \"description\": \"检测提供的网址是否被微信拦截了\", \"parameters\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\", \"description\": \"要检测的网址\"}}, \"required\": [\"url\"]}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "现在是几月几号，今天是星期几？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:36:32, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "今天是2024年3月13日，星期三。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "请告诉我现在的日期、时间和星期。"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:36:43, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "今天是2024年3月13日，星期三，现在是22:36:43。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "现在是几点了，今天是几号？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:37:05, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "现在是2024年3月13日，星期三，当前时间为22:37。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "现在是星期几，几点了？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:43:03, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "现在是星期三，当前时间是22:43。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "今天的日期是几月几号，现在是几点几分？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:43:25, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "今天是2024年3月13日，星期三。现在是22点43分。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "现在是几月几号，今天是星期几，几点了？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:49:16, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "现在是2024年3月13日，星期三，当前时间是晚上10点49分。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "现在是几点了，今天的日期是几月几号？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:49:43, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "现在是2024年3月13日，星期三。请问还有其他问题我可以帮助您吗？"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    },
+    {
+        "conversations": [
+            {
+                "from": "system",
+                "value": "根据用户的问题进行回答。"
+            },
+            {
+                "from": "human",
+                "value": "今天的日期是几号，现在是几点？"
+            },
+            {
+                "from": "function_call",
+                "value": "{\"arguments\":\"{}\",\"name\":\"today_date\"}"
+            },
+            {
+                "from": "observation",
+                "value": "今天是: 2024/03/13 22:50:55, 星期三"
+            },
+            {
+                "from": "gpt",
+                "value": "今天是2024年3月13日，现在是22点50分55秒。"
+            }
+        ],
+        "tools": "[{\"name\": \"today_date\", \"description\": \"获取现在的日期，时间，和星期\", \"parameters\": {\"type\": \"object\", \"properties\": {}, \"required\": []}}]"
+    }
+]
