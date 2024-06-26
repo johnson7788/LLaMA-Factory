@@ -395,5 +395,17 @@
     "food_sentiment": {
         "file_name": "food_sentiment.json",
         "file_sha1": "84ce297fa049eac46815a6c0315a0b6ec03efb71"
+    },
+    "food_entity": {
+        "file_name": "food_entity.json",
+        "file_sha1": "22d4377d3ace31cce7b4c30c6408a8b3c9031454"
+    },
+    "food_classify": {
+        "file_name": "food_entity.json",
+        "file_sha1": "7efa24573d4a7cc560afa06c05bdd0bd1e1793bd"
+    },
+    "food": {
+        "file_name": "food.json",
+        "file_sha1": "9eb66dab24b7ee65cde539f7eaa5100d5b854e7d"
     }
 }
